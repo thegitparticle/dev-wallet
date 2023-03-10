@@ -24,6 +24,7 @@ export default function App() {
 	}
 	return (
 		<DripsyProvider theme={dripsyTheme}>
+			<View onLayout={onLayoutRootView} />
 			<RootStack />
 			<StatusBar style="light" />
 		</DripsyProvider>
