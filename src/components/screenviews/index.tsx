@@ -1,10 +1,12 @@
 import { useSx, View } from "dripsy";
-import { ImageBackground } from "react-native";
+import { ImageBackground, ImageSourcePropType } from "react-native";
 import { BlurView } from "expo-blur";
 
 export const AuthScreenView = ({ children }: any) => {
 	return (
-		<ScreenView backgroundImage="../../../assets/backgroundgradients/bg-gradient-1.png">
+		<ScreenView
+			backgroundImage={require("../../../assets/backgroundgradients/bg-gradient-1.png")}
+		>
 			{children}
 		</ScreenView>
 	);
@@ -12,7 +14,9 @@ export const AuthScreenView = ({ children }: any) => {
 
 export const MainScreenView = ({ children }: any) => {
 	return (
-		<ScreenView backgroundImage="../../../assets/backgroundgradients/bg-gradient-2.png">
+		<ScreenView
+			backgroundImage={require("../../../assets/backgroundgradients/bg-gradient-2.png")}
+		>
 			{children}
 		</ScreenView>
 	);
@@ -20,7 +24,9 @@ export const MainScreenView = ({ children }: any) => {
 
 export const SecondaryScreenView = ({ children }: any) => {
 	return (
-		<ScreenView backgroundImage="../../../assets/backgroundgradients/bg-gradient-3.png">
+		<ScreenView
+			backgroundImage={require("../../../assets/backgroundgradients/bg-gradient-3.png")}
+		>
 			{children}
 		</ScreenView>
 	);
@@ -28,7 +34,7 @@ export const SecondaryScreenView = ({ children }: any) => {
 
 interface ScreenViewProps {
 	children: React.ReactNode;
-	backgroundImage: string;
+	backgroundImage: ImageSourcePropType;
 }
 
 function ScreenView(props: ScreenViewProps) {
@@ -37,7 +43,7 @@ function ScreenView(props: ScreenViewProps) {
 	return (
 		<View variant="layout.full_screen" sx={{ backgroundColor: "dark" }}>
 			<ImageBackground
-				source={require(props.backgroundImage)}
+				source={props.backgroundImage}
 				style={sx({ width: "100%", height: "100%" })}
 			>
 				<BlurView
