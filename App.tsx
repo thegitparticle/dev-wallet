@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { DripsyProvider, Text, View } from "dripsy";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useCallback } from "react";
+import { dripsyTheme } from "./src/theme/dripsyTheme";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const [fontsLoaded] = useFonts({
+		"Kumbh-Sans": require("./assets/fonts/KumbhSans-VariableFont_wght.ttf"),
+	});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	const onLayoutRootView = useCallback(async () => {
+		if (fontsLoaded) {
+			await SplashScreen.hideAsync();
+		}
+	}, [fontsLoaded]);
+
+	if (!fontsLoaded) {
+		return null;
+	}
+	return (
+		<DripsyProvider theme={dripsyTheme}>
+			<View
+				variant="layout.full_screen"
+				sx={{ justifyContent: "center", alignItems: "center" }}
+				onLayout={onLayoutRootView}
+			>
+				<Text variant="text.body_large">
+					Dev Wallet - a no frills wallet for developers
+				</Text>
+				<StatusBar style="auto" />
+			</View>
+		</DripsyProvider>
+	);
+}
