@@ -11,6 +11,7 @@
   "dependencies": {
     "dripsy": "^3.10.0",
     "expo": "~48.0.6",
+    "expo-blur": "~12.2.2",
     "expo-font": "~11.1.1",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.4",
