@@ -1,11 +1,10 @@
-import { DripsyProvider, Text, View } from "dripsy";
+import { DripsyProvider, View } from "dripsy";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useCallback } from "react";
-import { AuthScreenView } from "./src/components/screenviews";
+import RootStack from "./src/navigation/RootStack";
 import { dripsyTheme } from "./src/theme/dripsyTheme";
-import { NavigationContainer } from "@react-navigation/native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,28 +23,9 @@ export default function App() {
 		return null;
 	}
 	return (
-		<NavigationContainer>
-			<DripsyProvider theme={dripsyTheme}>
-				<View onLayout={onLayoutRootView}>
-					<AuthScreenView>
-						<View
-							variant="layout.full_screen"
-							sx={{
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<Text
-								variant="text.body_large"
-								sx={{ color: "light" }}
-							>
-								Dev Wallet - a no frills wallet for developers
-							</Text>
-							<StatusBar style="light" />
-						</View>
-					</AuthScreenView>
-				</View>
-			</DripsyProvider>
-		</NavigationContainer>
+		<DripsyProvider theme={dripsyTheme}>
+			<RootStack />
+			<StatusBar style="light" />
+		</DripsyProvider>
 	);
 }
