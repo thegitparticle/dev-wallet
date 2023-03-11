@@ -1,3 +1,5 @@
+import "@ethersproject/shims";
+
 import { DripsyProvider, View } from "dripsy";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";

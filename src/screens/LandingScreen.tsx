@@ -1,10 +1,10 @@
-import { View, Text } from "dripsy";
+import { Text, View } from "dripsy";
 import { Button } from "react-native";
 import { AuthScreenView } from "../components/screenviews";
-import { useAuthState } from "../state/authState";
+import { useAuthStackNavigation } from "../navigation/types";
 
 export default function LandingScreen() {
-	const authState = useAuthState();
+	const navigation = useAuthStackNavigation();
 
 	return (
 		<AuthScreenView>
@@ -21,10 +21,7 @@ export default function LandingScreen() {
 				<Button
 					title="Login"
 					onPress={() => {
-						authState.setAuthDetails({
-							address: "0x1234567890",
-							loggedIn: true,
-						});
+						navigation.navigate("CreateWalletScreen");
 					}}
 				/>
 			</View>
