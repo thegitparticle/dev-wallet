@@ -3,11 +3,13 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { Button } from "react-native";
 import { MainScreenView } from "../components/screenviews";
+import { useHomeStackNavigation } from "../navigation/types";
 import { useAuthState } from "../state/authState";
 import { goerliAlchemy, mumbaiAlchemy } from "../utils/alchemyConfig";
 
 export default function HomeScreen() {
 	const authState = useAuthState();
+	const navigation = useHomeStackNavigation();
 
 	const userWalletAddress = authState.authDetails.address;
 
@@ -56,6 +58,13 @@ export default function HomeScreen() {
 				>
 					{mumbaiBalance}
 				</Text>
+				<Button
+					title="Connect Wallet"
+					color="blue"
+					onPress={() => {
+						navigation.navigate("ConnectWalletScreen");
+					}}
+				/>
 				<Button
 					title="LogOut"
 					onPress={() => {

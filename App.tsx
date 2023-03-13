@@ -1,13 +1,20 @@
 import "@ethersproject/shims";
+import { Buffer } from "buffer";
+import "react-native-get-random-values";
+import "text-encoding-polyfill";
+global.Buffer = Buffer;
+import "@walletconnect/react-native-compat";
 
 import { DripsyProvider, View } from "dripsy";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { polyfillWebCrypto } from "expo-standard-web-crypto";
 import { StatusBar } from "expo-status-bar";
 import { useCallback } from "react";
 import RootStack from "./src/navigation/RootStack";
 import { dripsyTheme } from "./src/theme/dripsyTheme";
 
+polyfillWebCrypto();
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {

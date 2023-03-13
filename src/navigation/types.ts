@@ -17,6 +17,7 @@ export const useAuthStackNavigation = (): AuthStackNavigationProp =>
 //  Home stack types
 export type HomeStackParamList = {
 	HomeScreen: undefined;
+	ConnectWalletScreen: undefined;
 };
 
 export type HomeStackNavigationProp =
