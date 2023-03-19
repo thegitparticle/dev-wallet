@@ -4,6 +4,7 @@ import "react-native-get-random-values";
 import "text-encoding-polyfill";
 global.Buffer = Buffer;
 import "@walletconnect/react-native-compat";
+import "react-native-gesture-handler";
 
 import { DripsyProvider, View } from "dripsy";
 import { useFonts } from "expo-font";

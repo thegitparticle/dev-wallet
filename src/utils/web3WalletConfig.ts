@@ -11,14 +11,15 @@ import {
 	ConnectedDappDetails,
 	useConnectedDappsState,
 } from "../state/connectedDappsState";
+import { ConnectionRequestSheetProps } from "../components/sheets/ConnectionRequestSheet";
 
 const core = new Core({
 	projectId: WALLETCONNECT_PROJECT_ID,
 });
 
 export let web3wallet: Client;
-
-const liveWalletsState = useLiveWalletsState.getState();
+export let showConnectionRequestSheet: boolean = false;
+export let connectionRequestSheetDappDetails: ConnectionRequestSheetProps;
 
 export async function web3walletSetup(liveWallets: LiveWalletDetails[]) {
 	web3wallet = await Web3Wallet.init({
@@ -31,9 +32,17 @@ export async function web3walletSetup(liveWallets: LiveWalletDetails[]) {
 		},
 	});
 
-	web3wallet.on("session_proposal", async (proposal) => {
-		console.log("web3wallet listener", "session_proposal triggered");
+	// web3wallet.on("session_proposal", async (proposal) => {
+	// 	console.log("web3wallet listener", "session_proposal triggered");
 
+	// 	connectionRequestSheetDappDetails = {
+	// 		proposal: proposal,
+	// 		walletAddress: liveWallets[0].address,
+	// 	};
+
+	// 	showConnectionRequestSheet = true;
+
+	/*
 		const namespaces: SessionTypes.Namespaces = {};
 
 		const requiredNamespaces = proposal.params.requiredNamespaces;
@@ -72,5 +81,6 @@ export async function web3walletSetup(liveWallets: LiveWalletDetails[]) {
 			.catch((error) => {
 				console.log("error approving session", error);
 			});
-	});
+			*/
+	// });
 }

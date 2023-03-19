@@ -8,6 +8,9 @@ import { useGoerliBalances } from "../hooks/useGoerliBalances";
 import { useHomeStackNavigation } from "../navigation/types";
 import { useAuthState } from "../state/authState";
 import { goerliAlchemy, mumbaiAlchemy } from "../utils/alchemyConfig";
+import Modal from "react-native-modal";
+import ConnectionRequestSheet from "../components/sheets/ConnectionRequestSheet";
+import { showConnectionRequestSheet } from "../utils/web3WalletConfig";
 
 export default function HomeScreen() {
 	const authState = useAuthState();
@@ -91,6 +94,7 @@ export default function HomeScreen() {
 						authState.clearHistory();
 					}}
 				/>
+
 				{/* {!loading ? (
 					<BalanceList balanceList={balances} />
 				) : (

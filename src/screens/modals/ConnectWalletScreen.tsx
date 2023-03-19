@@ -8,11 +8,22 @@ import { useLiveWalletsState } from "../../state/liveWalletsState";
 import { web3wallet } from "../../utils/web3WalletConfig";
 import { parseUri } from "@walletconnect/utils";
 import { setupWalletConnectV1 } from "../../utils/walletConnectv1Config";
+import Modal from "react-native-modal";
+import ConnectionRequestSheet, {
+	ConnectionRequestSheetProps,
+} from "../../components/sheets/ConnectionRequestSheet";
+import { Web3WalletTypes } from "@walletconnect/web3wallet";
 
 export default function ConnectWalletScreen() {
 	const liveWalletsState = useLiveWalletsState();
 
 	const [scanned, setScanned] = useState(false);
+
+	const [showConnectionRequestSheet, setShowConnectionRequestSheet] =
+		useState(false);
+
+	const [proposal, setProposal] =
+		useState<Web3WalletTypes.SessionProposal | null>(null);
 
 	const [permission, requestPermission] = BarCodeScanner.usePermissions();
 
@@ -41,6 +52,13 @@ export default function ConnectWalletScreen() {
 		return <Text>No access to camera</Text>;
 	}
 
+	web3wallet.on("session_proposal", async (proposal) => {
+		console.log("web3wallet listener", "session_proposal triggered");
+
+		setProposal(proposal);
+		setShowConnectionRequestSheet(true);
+	});
+
 	return (
 		<MainScreenView>
 			<View
@@ -66,6 +84,18 @@ export default function ConnectWalletScreen() {
 					Connect wallet
 				</Text>
 			</View>
+			<Modal
+				isVisible={showConnectionRequestSheet}
+				style={{
+					justifyContent: "flex-end",
+					margin: 0,
+				}}
+			>
+				<ConnectionRequestSheet
+					proposal={proposal}
+					walletAddress={liveWalletsState.wallets[0].address}
+				/>
+			</Modal>
 		</MainScreenView>
 	);
 }
