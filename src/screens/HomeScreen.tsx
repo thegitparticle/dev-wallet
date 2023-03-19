@@ -2,7 +2,9 @@ import { Text, View } from "dripsy";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { Button } from "react-native";
+import BalanceList from "../components/balances/BalanceList";
 import { MainScreenView } from "../components/screenviews";
+import { useGoerliBalances } from "../hooks/useGoerliBalances";
 import { useHomeStackNavigation } from "../navigation/types";
 import { useAuthState } from "../state/authState";
 import { goerliAlchemy, mumbaiAlchemy } from "../utils/alchemyConfig";
@@ -30,6 +32,10 @@ export default function HomeScreen() {
 
 		fetchBalances();
 	}, []);
+
+	// const { loading, balances } = useGoerliBalances(
+	// 	"0x1239b15ECE331E2eE767710a1953D889B59Ae84c"
+	// );
 
 	return (
 		<MainScreenView>
@@ -66,11 +72,28 @@ export default function HomeScreen() {
 					}}
 				/>
 				<Button
+					title="Receive"
+					color="blue"
+					onPress={() => {
+						navigation.navigate("MyWalletScreen");
+					}}
+				/>
+				<Button
 					title="LogOut"
 					onPress={() => {
 						authState.clearHistory();
 					}}
 				/>
+				{/* {!loading ? (
+					<BalanceList balanceList={balances} />
+				) : (
+					<Text
+						variant="text.body_large"
+						sx={{ color: "light", my: "$2" }}
+					>
+						no goerli balances
+					</Text>
+				)} */}
 			</View>
 		</MainScreenView>
 	);
