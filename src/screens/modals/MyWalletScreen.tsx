@@ -1,6 +1,6 @@
 import { Text } from "dripsy";
-import { SecondaryScreenView } from "../components/screenviews";
-import { useLiveWalletsState } from "../state/liveWalletsState";
+import { SecondaryScreenView } from "../../components/screenviews";
+import { useLiveWalletsState } from "../../state/liveWalletsState";
 import QRCode from "react-native-qrcode-svg";
 
 export default function MyWalletScreen() {

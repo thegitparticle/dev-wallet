@@ -1,5 +1,9 @@
 import WalletConnect from "@walletconnect/client";
 import LegacySignClient from "@walletconnect/client";
+import {
+	ConnectedDappDetails,
+	useConnectedDappsState,
+} from "../state/connectedDappsState";
 import { LiveWalletDetails } from "../state/liveWalletsState";
 
 interface SetupWalletConnectProps {
@@ -30,9 +34,22 @@ export function setupWalletConnectV1(props: SetupWalletConnectProps) {
 		}
 
 		walletConnectV1.approveSession({
-			accounts: ["0x6E71899C11BdEdb84392E461309e4c912e6ba038"],
+			accounts: [props.liveWallets[0].address],
 			chainId: 1,
 		});
+
+		const dappDetails: ConnectedDappDetails = {
+			name: payload.params[0].peerMeta.name,
+			icon: payload.params[0].peerMeta.icons[0],
+			description: payload.params[0].peerMeta.description,
+			dappKey: payload.params[0].peerId,
+			topic: payload.id,
+			url: payload.params[0].peerMeta.url,
+		};
+
+		useConnectedDappsState.setState((state) => ({
+			dapps: [...state.dapps, dappDetails],
+		}));
 
 		// Handle Session Request
 

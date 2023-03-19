@@ -79,6 +79,13 @@ export default function HomeScreen() {
 					}}
 				/>
 				<Button
+					title="COnnected Dapps"
+					color="blue"
+					onPress={() => {
+						navigation.navigate("ConnectedDappsScreen");
+					}}
+				/>
+				<Button
 					title="LogOut"
 					onPress={() => {
 						authState.clearHistory();

@@ -1,13 +1,13 @@
-import { MainScreenView } from "../components/screenviews";
+import { MainScreenView } from "../../components/screenviews";
 import { View, Text } from "dripsy";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useState, useEffect } from "react";
-import { dimensions } from "../theme/dripsyTheme";
+import { dimensions } from "../../theme/dripsyTheme";
 import WalletConnect from "@walletconnect/client";
-import { useLiveWalletsState } from "../state/liveWalletsState";
-import { web3wallet } from "../utils/web3WalletConfig";
+import { useLiveWalletsState } from "../../state/liveWalletsState";
+import { web3wallet } from "../../utils/web3WalletConfig";
 import { parseUri } from "@walletconnect/utils";
-import { setupWalletConnectV1 } from "../utils/walletConnectv1Config";
+import { setupWalletConnectV1 } from "../../utils/walletConnectv1Config";
 
 export default function ConnectWalletScreen() {
 	const liveWalletsState = useLiveWalletsState();

@@ -19,6 +19,7 @@ export type HomeStackParamList = {
 	HomeScreen: undefined;
 	ConnectWalletScreen: undefined;
 	MyWalletScreen: undefined;
+	ConnectedDappsScreen: undefined;
 };
 
 export type HomeStackNavigationProp =

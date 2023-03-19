@@ -3,13 +3,22 @@ import Client, { Web3Wallet } from "@walletconnect/web3wallet";
 import { SessionTypes } from "@walletconnect/types";
 // @ts-expect-error - `@env` is a virtualised module via Babel config.
 import { WALLETCONNECT_PROJECT_ID } from "react-native-dotenv";
-import { LiveWalletDetails } from "../state/liveWalletsState";
+import {
+	LiveWalletDetails,
+	useLiveWalletsState,
+} from "../state/liveWalletsState";
+import {
+	ConnectedDappDetails,
+	useConnectedDappsState,
+} from "../state/connectedDappsState";
 
 const core = new Core({
 	projectId: WALLETCONNECT_PROJECT_ID,
 });
 
 export let web3wallet: Client;
+
+const liveWalletsState = useLiveWalletsState.getState();
 
 export async function web3walletSetup(liveWallets: LiveWalletDetails[]) {
 	web3wallet = await Web3Wallet.init({
@@ -32,9 +41,7 @@ export async function web3walletSetup(liveWallets: LiveWalletDetails[]) {
 		Object.keys(requiredNamespaces).forEach((key) => {
 			const accounts: string[] = [];
 
-			accounts.push(
-				"eip155:1:0x6E71899C11BdEdb84392E461309e4c912e6ba038"
-			);
+			accounts.push(`eip155:1:${liveWallets[0].address}`);
 
 			namespaces[key] = {
 				accounts,
@@ -43,9 +50,27 @@ export async function web3walletSetup(liveWallets: LiveWalletDetails[]) {
 			};
 		});
 
-		const session = await web3wallet.approveSession({
-			id: proposal.id,
-			namespaces: namespaces,
-		});
+		await web3wallet
+			.approveSession({
+				id: proposal.id,
+				namespaces: namespaces,
+			})
+			.then((session) => {
+				const dappDetails: ConnectedDappDetails = {
+					name: session.peer.metadata.name,
+					icon: session.peer.metadata.icons[0],
+					description: session.peer.metadata.description,
+					dappKey: session.peer.publicKey,
+					topic: session.topic,
+					url: session.peer.metadata.url,
+				};
+
+				useConnectedDappsState.setState((state) => ({
+					dapps: [...state.dapps, dappDetails],
+				}));
+			})
+			.catch((error) => {
+				console.log("error approving session", error);
+			});
 	});
 }
