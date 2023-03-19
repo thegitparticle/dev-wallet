@@ -22,23 +22,26 @@ export const useGoerliBalances = (address: string) => {
 			let balance = parseInt(token.tokenBalance!);
 
 			// Get metadata of token
-			const metadata = await goerliAlchemy.core.getTokenMetadata(
-				token.contractAddress
-			);
+			await goerliAlchemy.core
+				.getTokenMetadata(token.contractAddress)
+				.then((res) => {
+					// Compute token balance in human-readable format
+					balance = balance / Math.pow(10, res.decimals!);
+					balance = parseFloat(balance.toFixed(2));
 
-			// Compute token balance in human-readable format
-			balance = balance / Math.pow(10, metadata.decimals!);
-			balance = parseFloat(balance.toFixed(2));
+					const balanceItem: BalanceItemProps = {
+						name: res.name || "Unknown",
+						symbol: res.symbol || "Unknown",
+						balance: balance,
+						address: token.contractAddress,
+						token_icon: res.logo || "",
+					};
 
-			const balanceItem: BalanceItemProps = {
-				name: metadata.name || "Unknown",
-				symbol: metadata.symbol || "Unknown",
-				balance: balance,
-				address: token.contractAddress,
-				token_icon: metadata.logo || "",
-			};
-
-			balancesArray.push(balanceItem);
+					balancesArray.push(balanceItem);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 
 		setBalances(balancesArray);
