@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "dev-wallet",
+    "name": "/dev/wallet",
     "slug": "dev-wallet",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/valley-night.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/appdefaults/wallet-logo.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/appdefaults/splash-1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0A0A0A"
     },
     "plugins": [
       [
@@ -23,16 +23,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/valley-night.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/appdefaults/wallet-logo.png",
+        "backgroundColor": "#0A0A0A"
       }
     },
     "web": {
-      "favicon": "./assets/valley-night.png"
+      "favicon": "./assets/appdefaults/wallet-logo.png"
     }
   }
 }
