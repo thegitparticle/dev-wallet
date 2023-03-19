@@ -11,6 +11,7 @@ import { goerliAlchemy, mumbaiAlchemy } from "../utils/alchemyConfig";
 import Modal from "react-native-modal";
 import ConnectionRequestSheet from "../components/sheets/ConnectionRequestSheet";
 import { showConnectionRequestSheet } from "../utils/web3WalletConfig";
+import NavBar from "../components/NavBar";
 
 export default function HomeScreen() {
 	const authState = useAuthState();
@@ -67,27 +68,7 @@ export default function HomeScreen() {
 				>
 					{mumbaiBalance}
 				</Text>
-				<Button
-					title="Connect Wallet"
-					color="blue"
-					onPress={() => {
-						navigation.navigate("ConnectWalletScreen");
-					}}
-				/>
-				<Button
-					title="Receive"
-					color="blue"
-					onPress={() => {
-						navigation.navigate("MyWalletScreen");
-					}}
-				/>
-				<Button
-					title="COnnected Dapps"
-					color="blue"
-					onPress={() => {
-						navigation.navigate("ConnectedDappsScreen");
-					}}
-				/>
+				<NavBar />
 				<Button
 					title="LogOut"
 					onPress={() => {
