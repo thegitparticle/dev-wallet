@@ -15,6 +15,7 @@ import NavBar from "../components/home/NavBar";
 import Constants from "expo-constants";
 import WalletSwitcher from "../components/home/WalletSwitcher";
 import CurrentWallet from "../components/home/CurrentWallet";
+import BalanceLists from "../components/home/BalanceLists";
 /*
 
 1. show wallet address - highlight the first and last few chars
@@ -29,30 +30,6 @@ export default function HomeScreen() {
 	const authState = useAuthState();
 	const navigation = useHomeStackNavigation();
 
-	const userWalletAddress = authState.authDetails.address;
-
-	const [goerliBalance, setGoerliBalance] = useState("");
-	const [mumbaiBalance, setMumbaiBalance] = useState("");
-
-	useEffect(() => {
-		async function fetchBalances() {
-			const goerliBalance = await goerliAlchemy.core.getBalance(
-				userWalletAddress
-			);
-			const mumbaiBalance = await mumbaiAlchemy.core.getBalance(
-				userWalletAddress
-			);
-			setGoerliBalance(ethers.utils.formatEther(goerliBalance));
-			setMumbaiBalance(ethers.utils.formatEther(mumbaiBalance));
-		}
-
-		fetchBalances();
-	}, []);
-
-	// const { loading, balances } = useGoerliBalances(
-	// 	"0x1239b15ECE331E2eE767710a1953D889B59Ae84c"
-	// );
-
 	return (
 		<MainScreenView>
 			<View
@@ -64,8 +41,9 @@ export default function HomeScreen() {
 			>
 				<WalletSwitcher />
 				<CurrentWallet />
+				<BalanceLists />
 
-				<Text
+				{/* <Text
 					variant="text.body_large"
 					sx={{ color: "light", my: "$2" }}
 				>
@@ -83,7 +61,7 @@ export default function HomeScreen() {
 					onPress={() => {
 						authState.clearHistory();
 					}}
-				/>
+				/> */}
 
 				{/* {!loading ? (
 					<BalanceList balanceList={balances} />
