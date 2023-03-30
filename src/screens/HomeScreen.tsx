@@ -11,7 +11,15 @@ import { goerliAlchemy, mumbaiAlchemy } from "../utils/alchemyConfig";
 import Modal from "react-native-modal";
 import ConnectionRequestSheet from "../components/sheets/ConnectionRequestSheet";
 import { showConnectionRequestSheet } from "../utils/web3WalletConfig";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/home/NavBar";
+
+/*
+
+1. show wallet address - highlight the first and last few chars
+2. Tabs to show list of balances
+3. 3 nav bar buttons
+
+*/
 
 export default function HomeScreen() {
 	const authState = useAuthState();

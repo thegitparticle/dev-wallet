@@ -3,7 +3,7 @@ import { View, Text } from "dripsy";
 import { Button } from "react-native";
 import { useAuthStackNavigation } from "../../navigation/types";
 import { useLiveWalletsState } from "../../state/liveWalletsState";
-import SeedPhraseComponent from "../../components/specifics/SeedPhraseComponent";
+import SeedPhraseComponent from "../../components/auth/SeedPhraseComponent";
 import { useAuthState } from "../../state/authState";
 import { useSx } from "dripsy";
 

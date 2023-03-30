@@ -1,6 +1,6 @@
 import { View } from "dripsy";
 import { Button } from "react-native";
-import { useHomeStackNavigation } from "../navigation/types";
+import { useHomeStackNavigation } from "../../navigation/types";
 
 export default function NavBar() {
 	const navigation = useHomeStackNavigation();
@@ -24,13 +24,7 @@ export default function NavBar() {
 					navigation.navigate("ConnectWalletScreen");
 				}}
 			/>
-			<Button
-				title="Receive"
-				color="blue"
-				onPress={() => {
-					navigation.navigate("MyWalletScreen");
-				}}
-			/>
+
 			<Button
 				title="COnnected Dapps"
 				color="blue"
