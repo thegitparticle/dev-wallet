@@ -12,7 +12,7 @@ import Modal from "react-native-modal";
 import ConnectionRequestSheet from "../components/sheets/ConnectionRequestSheet";
 import { showConnectionRequestSheet } from "../utils/web3WalletConfig";
 import NavBar from "../components/home/NavBar";
-
+import Constants from "expo-constants";
 /*
 
 1. show wallet address - highlight the first and last few chars
@@ -20,6 +20,8 @@ import NavBar from "../components/home/NavBar";
 3. 3 nav bar buttons
 
 */
+
+const statusBarHeight = Constants.statusBarHeight;
 
 export default function HomeScreen() {
 	const authState = useAuthState();
@@ -54,8 +56,8 @@ export default function HomeScreen() {
 			<View
 				variant="layout.full_screen"
 				sx={{
-					justifyContent: "center",
 					alignItems: "center",
+					marginTop: statusBarHeight,
 				}}
 			>
 				<Text

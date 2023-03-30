@@ -1,6 +1,7 @@
-import { View } from "dripsy";
+import { Pressable, View } from "dripsy";
 import { Button } from "react-native";
 import { useHomeStackNavigation } from "../../navigation/types";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function NavBar() {
 	const navigation = useHomeStackNavigation();
@@ -9,29 +10,38 @@ export default function NavBar() {
 		<View
 			sx={{
 				backgroundColor: "off_dark",
-				height: 50,
+				height: 60,
 				width: "50%",
-				borderRadius: 25,
+				borderRadius: 60,
 				flexDirection: "row",
-				bottom: 50,
+				justifyContent: "space-evenly",
+				alignItems: "center",
+				bottom: 100,
 				position: "absolute",
 			}}
 		>
-			<Button
-				title="Connect Wallet"
-				color="blue"
+			<Pressable
 				onPress={() => {
 					navigation.navigate("ConnectWalletScreen");
 				}}
+			>
+				<Ionicons name="scan" size={32} color="#E5E5E5" />
+			</Pressable>
+			<View
+				sx={{
+					width: 1,
+					height: 30,
+					backgroundColor: "light",
+					opacity: 0.5,
+				}}
 			/>
-
-			<Button
-				title="COnnected Dapps"
-				color="blue"
+			<Pressable
 				onPress={() => {
 					navigation.navigate("ConnectedDappsScreen");
 				}}
-			/>
+			>
+				<Ionicons name="apps" size={32} color="#E5E5E5" />
+			</Pressable>
 		</View>
 	);
 }
