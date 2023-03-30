@@ -10,6 +10,20 @@ module.exports = function (api) {
 					verbose: false,
 				},
 			],
+			[
+				"@tamagui/babel-plugin",
+				{
+					components: ["tamagui"],
+					config: "./tamagui.config.ts",
+					logTimings: true,
+				},
+			],
+			[
+				"transform-inline-environment-variables",
+				{
+					include: "TAMAGUI_TARGET",
+				},
+			],
 			["react-native-reanimated/plugin"],
 		],
 	};

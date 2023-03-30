@@ -13,6 +13,8 @@ import ConnectionRequestSheet from "../components/sheets/ConnectionRequestSheet"
 import { showConnectionRequestSheet } from "../utils/web3WalletConfig";
 import NavBar from "../components/home/NavBar";
 import Constants from "expo-constants";
+import WalletSwitcher from "../components/home/WalletSwitcher";
+import CurrentWallet from "../components/home/CurrentWallet";
 /*
 
 1. show wallet address - highlight the first and last few chars
@@ -56,16 +58,13 @@ export default function HomeScreen() {
 			<View
 				variant="layout.full_screen"
 				sx={{
-					alignItems: "center",
 					marginTop: statusBarHeight,
+					margin: "$4",
 				}}
 			>
-				<Text
-					variant="text.body_large"
-					sx={{ color: "light", my: "$2" }}
-				>
-					{userWalletAddress}
-				</Text>
+				<WalletSwitcher />
+				<CurrentWallet />
+
 				<Text
 					variant="text.body_large"
 					sx={{ color: "light", my: "$2" }}

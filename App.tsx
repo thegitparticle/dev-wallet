@@ -14,6 +14,8 @@ import { StatusBar } from "expo-status-bar";
 import { useCallback } from "react";
 import RootStack from "./src/navigation/RootStack";
 import { dripsyTheme } from "./src/theme/dripsyTheme";
+import { TamaguiProvider, Theme } from "tamagui";
+import config from "./tamagui.config";
 
 polyfillWebCrypto();
 SplashScreen.preventAutoHideAsync();
@@ -33,10 +35,16 @@ export default function App() {
 		return null;
 	}
 	return (
-		<DripsyProvider theme={dripsyTheme}>
-			<View onLayout={onLayoutRootView} />
-			<RootStack />
-			<StatusBar style="light" />
-		</DripsyProvider>
+		<TamaguiProvider config={config}>
+			<Theme name={"dark"}>
+				<Theme name="blue">
+					<DripsyProvider theme={dripsyTheme}>
+						<View onLayout={onLayoutRootView} />
+						<RootStack />
+						<StatusBar style="light" />
+					</DripsyProvider>
+				</Theme>
+			</Theme>
+		</TamaguiProvider>
 	);
 }
