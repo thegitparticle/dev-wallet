@@ -1,5 +1,6 @@
 import { Text, View } from "dripsy";
-import { Button } from "react-native";
+import { useWindowDimensions } from "react-native";
+import { Button, Image, YStack } from "tamagui";
 import { AuthScreenView } from "../components/screenviews";
 import { useAuthStackNavigation } from "../navigation/types";
 
@@ -8,23 +9,33 @@ export default function LandingScreen() {
 
 	return (
 		<AuthScreenView>
-			<View
-				variant="layout.full_screen"
-				sx={{
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-			>
-				<Text variant="text.body_large" sx={{ color: "light" }}>
-					Dev Wallet - a no frills wallet for developers
-				</Text>
+			<YStack flex={1} justifyContent="space-between" alignItems="center">
+				<View style={{ marginVertical: "10%" }} />
+				<YStack justifyContent="center" alignItems="center">
+					<Image
+						src={require("../../assets/dev-wallet-logo.png")}
+						height={30}
+						width={useWindowDimensions().width}
+						resizeMode="contain"
+					/>
+					<Text
+						variant="body_large"
+						sx={{ color: "light", my: "$4" }}
+					>
+						a no frills wallet for developers
+					</Text>
+				</YStack>
 				<Button
-					title="Login"
 					onPress={() => {
 						navigation.navigate("CreateWalletScreen");
 					}}
-				/>
-			</View>
+					style={{ marginVertical: "10%" }}
+				>
+					<Text variant="button_large" sx={{ color: "light" }}>
+						create new wallet
+					</Text>
+				</Button>
+			</YStack>
 		</AuthScreenView>
 	);
 }

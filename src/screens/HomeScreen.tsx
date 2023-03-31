@@ -16,6 +16,7 @@ import Constants from "expo-constants";
 import WalletSwitcher from "../components/home/WalletSwitcher";
 import CurrentWallet from "../components/home/CurrentWallet";
 import BalanceLists from "../components/home/BalanceLists";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 /*
 
 1. show wallet address - highlight the first and last few chars
@@ -30,6 +31,17 @@ export default function HomeScreen() {
 	const authState = useAuthState();
 	const navigation = useHomeStackNavigation();
 
+	async function clearAsyncStorage() {
+		try {
+			await AsyncStorage.clear();
+		} catch (e) {
+			// clear error
+			console.log("error clearing storage");
+		}
+
+		console.log("Done.");
+	}
+
 	return (
 		<MainScreenView>
 			<View
@@ -41,38 +53,8 @@ export default function HomeScreen() {
 			>
 				<WalletSwitcher />
 				<CurrentWallet />
+				<Button title="LogOut" onPress={() => clearAsyncStorage()} />
 				<BalanceLists />
-
-				{/* <Text
-					variant="text.body_large"
-					sx={{ color: "light", my: "$2" }}
-				>
-					{goerliBalance}
-				</Text>
-				<Text
-					variant="text.body_large"
-					sx={{ color: "light", my: "$2" }}
-				>
-					{mumbaiBalance}
-				</Text>
-				<NavBar />
-				<Button
-					title="LogOut"
-					onPress={() => {
-						authState.clearHistory();
-					}}
-				/> */}
-
-				{/* {!loading ? (
-					<BalanceList balanceList={balances} />
-				) : (
-					<Text
-						variant="text.body_large"
-						sx={{ color: "light", my: "$2" }}
-					>
-						no goerli balances
-					</Text>
-				)} */}
 			</View>
 		</MainScreenView>
 	);

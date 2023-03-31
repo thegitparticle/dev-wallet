@@ -61,7 +61,7 @@ export default function BalanceLists() {
 
 				return (
 					<Text
-						variant="text.heading_large"
+						variant="heading_large"
 						sx={{ color: "light", my: "$2" }}
 						ellipsizeMode="tail"
 					>
@@ -100,7 +100,7 @@ export default function BalanceLists() {
 
 				return (
 					<Text
-						variant="text.heading_large"
+						variant="heading_large"
 						sx={{ color: "light", my: "$2" }}
 						ellipsizeMode="tail"
 					>

@@ -1,6 +1,9 @@
 import { useSx, View } from "dripsy";
 import { ImageBackground, ImageSourcePropType } from "react-native";
 import { BlurView } from "expo-blur";
+import Constants from "expo-constants";
+
+const statusBarHeight = Constants.statusBarHeight;
 
 export const AuthScreenView = ({ children }: any) => {
 	return (
@@ -55,6 +58,7 @@ function ScreenView(props: ScreenViewProps) {
 						position: "absolute",
 						backgroundColor: "dark",
 						opacity: 0.75,
+						paddingTop: statusBarHeight,
 					})}
 				>
 					{props.children}
