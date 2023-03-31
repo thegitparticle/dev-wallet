@@ -1,7 +1,7 @@
-import { Text, View } from "dripsy";
+import { Text } from "dripsy";
 import { ethers } from "ethers";
 import { useEffect } from "react";
-import { Button } from "react-native";
+import { Spinner, YStack } from "tamagui";
 import { AuthScreenView } from "../../components/screenviews";
 import { useAuthStackNavigation } from "../../navigation/types";
 import {
@@ -37,17 +37,12 @@ export default function CreateWalletScreen() {
 
 	return (
 		<AuthScreenView>
-			<View
-				variant="layout.full_screen"
-				sx={{
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-			>
-				<Text variant="text.body_large" sx={{ color: "light" }}>
-					creating wallet
+			<YStack flex={1} justifyContent="center" alignItems="center">
+				<Spinner size="large" color="$orange10" />
+				<Text variant="body_large" sx={{ color: "light", my: "$4" }}>
+					creating new wallet
 				</Text>
-			</View>
+			</YStack>
 		</AuthScreenView>
 	);
 }

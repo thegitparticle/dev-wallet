@@ -1,4 +1,5 @@
 import { View, Text } from "dripsy";
+import { Button, XStack, YStack } from "tamagui";
 
 interface SeedPhraseComponentProps {
 	seedPhrase: string;
@@ -7,22 +8,28 @@ interface SeedPhraseComponentProps {
 export default function SeedPhraseComponent(props: SeedPhraseComponentProps) {
 	const phraseArray: string[] = props.seedPhrase.split(" ");
 
-	const OneWord = (word: string, id: number) => {
+	const OneWord = (word: string, id: number, second: boolean) => {
 		return (
-			<Text key={id} variant="text.body_large" sx={{ color: "light" }}>
-				{String(id + 1)}. {word}
-			</Text>
+			<Button key={id} onPress={() => {}} theme="green">
+				<Text variant="button_large" sx={{ color: "light" }}>
+					{String(id + 1 + (second ? 6 : 0))}. {word}
+				</Text>
+			</Button>
 		);
 	};
 
 	return (
-		<View
-			sx={{
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			{phraseArray.map((word, id) => OneWord(word, id))}
-		</View>
+		<XStack space>
+			<YStack space>
+				{phraseArray
+					.slice(0, 6)
+					.map((word, id) => OneWord(word, id, false))}
+			</YStack>
+			<YStack space>
+				{phraseArray
+					.slice(6, 12)
+					.map((word, id) => OneWord(word, id, true))}
+			</YStack>
+		</XStack>
 	);
 }
